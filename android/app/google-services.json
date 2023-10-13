@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "714337731386",
+    "project_id": "to-do-application-fda24",
+    "storage_bucket": "to-do-application-fda24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714337731386:android:650145e722a3ff2432c603",
+        "android_client_info": {
+          "package_name": "com.example.to_do_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGODEWHrslG79iP2Xq2sLFGn0jG0KE9qI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
