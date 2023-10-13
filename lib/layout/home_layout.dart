@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_application/layout/bottom_sheet_widget.dart';
 import 'package:to_do_application/moduls/home_screen/home_screen.dart';
 import 'package:to_do_application/moduls/settings_screen/settings_screen.dart';
 
@@ -26,7 +27,9 @@ class _HomeLayoutState extends State<HomeLayout> {
         backgroundColor: Colors.white,
         radius: 34,
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            showAddTaskBottomSheet();
+          },
           child: const Icon(
             Icons.add,
             color: Colors.white,
@@ -60,6 +63,19 @@ class _HomeLayoutState extends State<HomeLayout> {
           ],
         ),
       ),
+    );
+  }
+
+  void showAddTaskBottomSheet() {
+    showModalBottomSheet(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(25),
+          topRight: Radius.circular(25),
+        ),
+      ),
+      context: context,
+      builder: (context) => BottomSheetWidget(),
     );
   }
 }
