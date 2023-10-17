@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_application/layout/bottom_sheet_widget.dart';
-import 'package:to_do_application/moduls/home_screen/home_screen.dart';
-import 'package:to_do_application/moduls/settings_screen/settings_screen.dart';
+import 'package:to_do_application/pages/home_screen/widgets/bottom_sheet_widget.dart';
+import 'package:to_do_application/pages/home_screen/home_screen.dart';
+import 'package:to_do_application/pages/settings_screen/settings_screen.dart';
 
 class HomeLayout extends StatefulWidget {
   static const String routeName = "Home Screen";
@@ -23,18 +23,14 @@ class _HomeLayoutState extends State<HomeLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: screens[selectedIndex],
-      floatingActionButton: CircleAvatar(
-        backgroundColor: Colors.white,
-        radius: 34,
-        child: FloatingActionButton(
-          onPressed: () {
-            showAddTaskBottomSheet();
-          },
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-            size: 30,
-          ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showAddTaskBottomSheet();
+        },
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+          size: 30,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -75,7 +71,7 @@ class _HomeLayoutState extends State<HomeLayout> {
         ),
       ),
       context: context,
-      builder: (context) => BottomSheetWidget(),
+      builder: (context) => const BottomSheetWidget(),
     );
   }
 }

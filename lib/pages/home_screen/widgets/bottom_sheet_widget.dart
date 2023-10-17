@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:to_do_application/core/network_layer/firestore_utils.dart';
 import 'package:to_do_application/core/widgets/custom_text_form_field.dart';
+import 'package:to_do_application/model/task_model.dart';
 
-class BottomSheetWidget extends StatelessWidget {
+class BottomSheetWidget extends StatefulWidget {
+  const BottomSheetWidget({super.key});
+
+  @override
+  State<BottomSheetWidget> createState() => _BottomSheetWidgetState();
+}
+
+class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   var formKey = GlobalKey<FormState>();
-
-  BottomSheetWidget({super.key});
-
+  DateTime selectedDate = DateTime.now();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
@@ -64,27 +72,35 @@ class BottomSheetWidget extends StatelessWidget {
                     showCalender(context);
                   },
                   child: Text(
-                    "13 oct 2023",
+                    DateFormat.yMMMd().format(selectedDate),
                     textAlign: TextAlign.center,
-                    style: theme.textTheme.bodyMedium!.copyWith(
+                    style: theme.textTheme.bodyLarge!.copyWith(
                       color: theme.primaryColor,
                     ),
                   ),
                 ),
-              ],
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  print(titleController.text);
-                }
-              },
-              child: Text(
-                "Add Task",
-                style: theme.textTheme.bodyLarge!.copyWith(
-                  color: Colors.white,
+                const SizedBox(height: 12),
+                ElevatedButton(
+                  onPressed: () async {
+                    if (formKey.currentState!.validate()) {
+                      var model = TaskModel(
+                        title: titleController.text,
+                        description: descriptionController.text,
+                        dateTime: selectedDate,
+                        isDone: false,
+                      );
+                      await FirestoreUtils.addDataToFireStore(model);
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: Text(
+                    "Add Task",
+                    style: theme.textTheme.bodyLarge!.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           ],
         ),
@@ -92,12 +108,15 @@ class BottomSheetWidget extends StatelessWidget {
     );
   }
 
-  void showCalender(BuildContext context) {
-    showDatePicker(
+  void showCalender(BuildContext context) async {
+    var dateSelected = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime.now(),
       lastDate: DateTime.now().add(const Duration(days: 365)),
     );
+    if (dateSelected == null) return;
+    selectedDate = dateSelected;
+    setState(() {});
   }
 }

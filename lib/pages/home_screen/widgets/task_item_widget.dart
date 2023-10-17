@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
+import 'package:to_do_application/core/network_layer/firestore_utils.dart';
+import 'package:to_do_application/model/task_model.dart';
 
 class TaskItemWidget extends StatelessWidget {
-  const TaskItemWidget({super.key});
+  const TaskItemWidget({super.key, required this.taskModel});
+
+  final TaskModel taskModel;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +34,9 @@ class TaskItemWidget extends StatelessWidget {
           motion: const DrawerMotion(),
           children: [
             SlidableAction(
-              onPressed: (context) {},
+              onPressed: (context) async {
+                await FirestoreUtils.deleteDataFromFirestore(taskModel);
+              },
               borderRadius: BorderRadius.circular(15),
               backgroundColor: const Color(0xFFEC4B4B),
               foregroundColor: Colors.white,
@@ -75,13 +82,27 @@ class TaskItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "Play basket ball",
-                    style: theme.textTheme.bodyLarge,
+                  Container(
+                    constraints: const BoxConstraints(
+                      maxWidth: 200,
+                      maxHeight: 500,
+                    ),
+                    child: Text(
+                      taskModel.title,
+                      style: theme.textTheme.bodyLarge,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  Text(
-                    "description",
-                    style: theme.textTheme.bodyMedium,
+                  Container(
+                    constraints: const BoxConstraints(
+                      maxWidth: 200,
+                      maxHeight: 500,
+                    ),
+                    child: Text(
+                      taskModel.description,
+                      style: theme.textTheme.bodyMedium,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   Row(
                     children: [
@@ -91,7 +112,7 @@ class TaskItemWidget extends StatelessWidget {
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        "10:30 AM",
+                        DateFormat.yMMMEd().format(taskModel.dateTime),
                         style: theme.textTheme.bodySmall,
                       ),
                     ],
