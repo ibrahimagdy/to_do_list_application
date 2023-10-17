@@ -11,6 +11,7 @@ class ApplicationTheme {
       onPrimary: Colors.white,
       seedColor: primaryColor,
       onSecondary: const Color(0xff61E757),
+      background: const Color(0xffDFECDB),
     ),
     scaffoldBackgroundColor: const Color(0xffDFECDB),
     appBarTheme: AppBarTheme(
@@ -55,7 +56,7 @@ class ApplicationTheme {
           color: primaryColor,
         ),
         bodyMedium: GoogleFonts.roboto(
-          fontSize: 15,
+          fontSize: 17,
           fontWeight: FontWeight.bold,
           color: const Color(0xff363636),
         ),
