@@ -40,13 +40,14 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: BoxDecoration(
                 color: Colors.white54,
                 borderRadius: BorderRadius.circular(8.0),
-              ), // Set the background color for inactive days
+              ),
               child: CalendarTimeline(
                 initialDate: DateTime.now(),
                 firstDate: DateTime.now(),
                 lastDate: DateTime.now().add(const Duration(days: 365)),
                 onDateSelected: (date) {
                   selectedDate = date;
+                  setState(() {});
                 },
                 leftMargin: 20,
                 monthColor: Colors.white,
@@ -54,7 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 activeDayColor: theme.primaryColor,
                 activeBackgroundDayColor: Colors.white,
                 dotsColor: theme.primaryColor,
-                selectableDayPredicate: (date) => date.day != 23,
                 locale: 'en_ISO',
               ),
             ),

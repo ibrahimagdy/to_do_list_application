@@ -46,29 +46,36 @@ class ApplicationTheme {
     ),
     textTheme: TextTheme(
         titleLarge: GoogleFonts.poppins(
-          fontWeight: FontWeight.bold,
-          fontSize: 22,
-          color: Colors.white,
-        ),
-        bodyLarge: GoogleFonts.poppins(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: primaryColor,
-        ),
-        bodyMedium: GoogleFonts.roboto(
-          fontSize: 17,
-          fontWeight: FontWeight.bold,
-          color: const Color(0xff363636),
-        ),
-        bodySmall: GoogleFonts.roboto(
-          fontSize: 12,
-          fontWeight: FontWeight.normal,
-          color: const Color(0xff363636),
-        )),
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: primaryColor,
-    ),
-  );
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+            color: Colors.white,
+          ),
+          titleMedium: GoogleFonts.poppins(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+            color: primaryColor,
+          ),
+          bodyLarge: GoogleFonts.poppins(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: primaryColor,
+          ),
+          bodyMedium: GoogleFonts.roboto(
+            fontSize: 17,
+            fontWeight: FontWeight.bold,
+            color: const Color(0xff363636),
+          ),
+          bodySmall: GoogleFonts.roboto(
+            fontSize: 12,
+            fontWeight: FontWeight.normal,
+            color: const Color(0xff363636),
+          )),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: primaryColor,
+      ),
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: Colors.white.withOpacity(0.9),
+      ));
 
   static ThemeData darkTheme = ThemeData(
     primaryColor: primaryColor,
