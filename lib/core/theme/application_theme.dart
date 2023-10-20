@@ -65,17 +65,18 @@ class ApplicationTheme {
             fontWeight: FontWeight.bold,
             color: const Color(0xff363636),
           ),
-          bodySmall: GoogleFonts.roboto(
-            fontSize: 12,
-            fontWeight: FontWeight.normal,
-            color: const Color(0xff363636),
-          )),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: primaryColor,
-      ),
-      bottomSheetTheme: BottomSheetThemeData(
-        backgroundColor: Colors.white.withOpacity(0.9),
-      ));
+        bodySmall: GoogleFonts.roboto(
+          fontSize: 12,
+          fontWeight: FontWeight.normal,
+          color: const Color(0xff363636),
+        )),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: primaryColor,
+    ),
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: Colors.white.withOpacity(0.9),
+    ),
+  );
 
   static ThemeData darkTheme = ThemeData(
     primaryColor: primaryColor,
@@ -136,6 +137,9 @@ class ApplicationTheme {
         )),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: primaryColor,
+    ),
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: Colors.white.withOpacity(0.9),
     ),
   );
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do_application/core/network_layer/firestore_utils.dart';
@@ -13,6 +14,7 @@ class TaskItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var local = AppLocalizations.of(context)!;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(
@@ -41,7 +43,7 @@ class TaskItemWidget extends StatelessWidget {
               backgroundColor: const Color(0xFFEC4B4B),
               foregroundColor: Colors.white,
               icon: Icons.delete,
-              label: 'Delete',
+              label: local.delete,
             ),
           ],
         ),
@@ -55,7 +57,7 @@ class TaskItemWidget extends StatelessWidget {
               backgroundColor: const Color(0xFFE8DD1B),
               foregroundColor: Colors.white,
               icon: Icons.edit,
-              label: 'Edit',
+              label: local.edit,
             ),
           ],
         ),

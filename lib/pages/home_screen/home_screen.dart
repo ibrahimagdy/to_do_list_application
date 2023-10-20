@@ -1,6 +1,7 @@
 import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:to_do_application/core/network_layer/firestore_utils.dart';
 import 'package:to_do_application/model/task_model.dart';
 import 'package:to_do_application/pages/home_screen/widgets/task_item_widget.dart';
@@ -18,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var local = AppLocalizations.of(context)!;
     return Column(
       children: [
         Stack(
@@ -30,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
               width: double.infinity,
               height: 160,
               child: Text(
-                "To Do List",
+                local.to_do_list,
                 style: theme.textTheme.titleLarge,
               ),
             ),
@@ -38,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6),
               margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
               decoration: BoxDecoration(
-                color: Colors.white54,
+                color: Colors.white38,
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: CalendarTimeline(
