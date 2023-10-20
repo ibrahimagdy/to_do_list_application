@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do_application/core/network_layer/firestore_utils.dart';
 import 'package:to_do_application/core/widgets/custom_text_form_field.dart';
@@ -20,6 +21,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var local = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Form(
@@ -29,30 +31,30 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Add New Task",
+              local.add_new_task,
               textAlign: TextAlign.center,
               style: theme.textTheme.titleLarge!.copyWith(
                 color: const Color(0xff383838),
               ),
             ),
             CustomTextFormField(
-              title: "Enter your task",
+              title: local.enter_your_task,
               controller: titleController,
               validator: (String? value) {
                 if (value == null || value.trim().isEmpty) {
-                  return "You must provide task title";
+                  return local.you_must_provide_task_title;
                 } else {
                   return null;
                 }
               },
             ),
             CustomTextFormField(
-              title: "Enter your task description",
+              title: local.enter_your_task_description,
               controller: descriptionController,
               maxLines: 3,
               validator: (String? value) {
                 if (value == null || value.trim().isEmpty) {
-                  return "You must provide task description";
+                  return local.you_must_provide_task_description;
                 } else {
                   return null;
                 }
@@ -62,7 +64,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  "Select Date",
+                  local.select_date,
                   style: theme.textTheme.bodyLarge!.copyWith(
                     color: const Color(0xff383838),
                   ),
@@ -94,7 +96,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                     }
                   },
                   child: Text(
-                    "Add Task",
+                    local.add_task,
                     style: theme.textTheme.bodyLarge!.copyWith(
                       color: Colors.white,
                     ),

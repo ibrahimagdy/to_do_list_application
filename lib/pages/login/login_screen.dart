@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:to_do_application/core/widgets/custom_text_form_field.dart';
 import 'package:to_do_application/pages/register/register_screen.dart';
 
@@ -25,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var local = AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
           color: theme.colorScheme.background,
@@ -33,14 +35,14 @@ class _LoginScreenState extends State<LoginScreen> {
             fit: BoxFit.cover,
           )),
       child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            centerTitle: true,
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          centerTitle: true,
             backgroundColor: Colors.transparent,
             title: Text(
-              "Login",
-              style: theme.textTheme.titleLarge,
-            ),
+              local.login,
+            style: theme.textTheme.titleLarge,
+          ),
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -52,27 +54,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     SizedBox(height: MediaQuery.of(context).size.height * 0.15),
                     Text(
-                      "Welcome back!",
-                      textAlign: TextAlign.start,
-                      style: theme.textTheme.titleLarge!.copyWith(
-                        color: Colors.black,
-                      ),
+                      local.welcome_back,
+                    textAlign: TextAlign.start,
+                    style: theme.textTheme.titleLarge!.copyWith(
+                      color: Colors.black,
                     ),
+                  ),
                     const SizedBox(height: 40),
                     CustomTextFormField(
                       controller: emailController,
-                      labelText: "Email",
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return "You must enter your email";
-                        }
-                        var regex = RegExp(
-                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-                        if (!regex.hasMatch(value)) {
-                          return "Invalid Email";
-                        }
-                        return null;
-                      },
+                    labelText: local.email,
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return local.you_must_enter_your_email;
+                      }
+                      var regex = RegExp(
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+                      if (!regex.hasMatch(value)) {
+                        return local.invalid_email;
+                      }
+                      return null;
+                    },
                     ),
                     const SizedBox(height: 20),
                     CustomTextFormField(
@@ -83,36 +85,36 @@ class _LoginScreenState extends State<LoginScreen> {
                           setState(() {});
                         },
                         child: isVisable == true
-                            ? const Icon(
-                                Icons.visibility_off_outlined,
-                                size: 30,
-                              )
-                            : const Icon(
-                                Icons.visibility_outlined,
-                                size: 30,
-                              ),
-                      ),
-                      controller: passwordController,
-                      labelText: "Password",
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return "You must enter your password";
-                        }
-                        return null;
-                      },
+                          ? const Icon(
+                              Icons.visibility_off_outlined,
+                              size: 30,
+                            )
+                          : const Icon(
+                              Icons.visibility_outlined,
+                              size: 30,
+                            ),
                     ),
+                    controller: passwordController,
+                    labelText: local.password,
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return local.you_must_enter_your_password;
+                      }
+                      return null;
+                    },
+                  ),
                     const SizedBox(height: 20),
                     Align(
                       alignment: Alignment.centerLeft,
                       child: TextButton(
                         onPressed: () {},
                         child: Text(
-                          "Forget Password?",
-                          textAlign: TextAlign.start,
-                          style: theme.textTheme.bodyMedium!.copyWith(
-                            color: Colors.black,
-                          ),
+                          local.forget_password,
+                        textAlign: TextAlign.start,
+                        style: theme.textTheme.bodyMedium!.copyWith(
+                          color: Colors.black,
                         ),
+                      ),
                       ),
                     ),
                     const SizedBox(height: 40),
@@ -131,9 +133,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Login",
-                              style: theme.textTheme.titleLarge,
-                            ),
+                              local.login,
+                            style: theme.textTheme.titleLarge,
+                          ),
                             const Icon(
                               Icons.arrow_forward,
                               size: 30,
@@ -149,44 +151,41 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.pushNamed(context, RegisterScreen.routeName);
                       },
                       child: Text(
-                        "OR Create New Account !",
-                        textAlign: TextAlign.center,
-                        style: theme.textTheme.bodyMedium!.copyWith(
-                          color: Colors.black,
-                        ),
+                        local.or_create_new_account,
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.bodyMedium!.copyWith(
+                        color: theme.primaryColor,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
-
   login() async {
     if (formKey.currentState!.validate()) {
       EasyLoading.show();
       try {
-        final credential =
-            await FirebaseAuth.instance.signInWithEmailAndPassword(
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text,
         );
         EasyLoading.dismiss();
 
-        SnackBarService.showSuccessMessage("Your Successfully signed in");
+        SnackBarService.showSuccessMessage("You Successfully signed in");
         Navigator.pushReplacementNamed(context, HomeLayout.routeName);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           EasyLoading.dismiss();
-          SnackBarService.showErrorMessage('No user found for that email.');
-          print('No user found for that email.');
+          SnackBarService.showErrorMessage('No user found for that email');
         } else if (e.code == 'wrong-password') {
           EasyLoading.dismiss();
           SnackBarService.showErrorMessage(
-              'Wrong password provided for that user.');
-          print('Wrong password provided for that user.');
+              'Wrong password provided for that user');
         }
       }
     }

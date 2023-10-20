@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:to_do_application/pages/settings_screen/widgets/language_bottom_sheet.dart';
 import 'package:to_do_application/pages/settings_screen/widgets/settings_item.dart';
 import 'package:to_do_application/pages/settings_screen/widgets/theme_bottom_sheet.dart';
@@ -9,6 +10,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var local = AppLocalizations.of(context)!;
     return Column(
       children: [
         Container(
@@ -18,21 +20,21 @@ class SettingsScreen extends StatelessWidget {
           width: double.infinity,
           height: 160,
           child: Text(
-            "Settings",
+            local.settings,
             style: theme.textTheme.titleLarge,
           ),
         ),
         const SizedBox(height: 30),
         SettingsItem(
-          settingOptionTitle: "Language",
-          settingOptionSelected: "English",
+          settingOptionTitle: local.language,
+          settingOptionSelected: local.english,
           onTabOption: () {
             showLanguageBottomSheet(context);
           },
         ),
         SettingsItem(
-          settingOptionTitle: "Theme Mode",
-          settingOptionSelected: "Light",
+          settingOptionTitle: local.theme_mode,
+          settingOptionSelected: local.light_mode,
           onTabOption: () {
             showThemeBottomSheet(context);
           },
@@ -44,7 +46,7 @@ class SettingsScreen extends StatelessWidget {
   void showLanguageBottomSheet(context) {
     showModalBottomSheet(
         context: context,
-        builder: (context) => LanguageBottomSheet(),
+        builder: (context) => const LanguageBottomSheet(),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
         ));
@@ -53,7 +55,7 @@ class SettingsScreen extends StatelessWidget {
   void showThemeBottomSheet(context) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => ThemeBottomSheet(),
+      builder: (context) => const ThemeBottomSheet(),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
       ),
