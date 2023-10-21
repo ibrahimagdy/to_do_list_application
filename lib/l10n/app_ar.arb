@@ -30,5 +30,8 @@
   "you_must_enter_your_password": "قم بإدخال كلمة المرور",
   "you_must_enter_your_full_name": "يجب إدخال اسمك الكامل",
   "invalid_password": "كلمة المرور غير صالحة",
-  "password_does_not_match_as_above": "كلمة المرور غير مطابقة كما في الأعلى"
+  "password_does_not_match_as_above": "كلمة المرور غير مطابقة كما في الأعلى",
+  "logout": "تسجيل خروج",
+  "log_out_of_your_account": "تسجيل خروج من حسابك؟",
+  "cancel": "إلغاء"
 }

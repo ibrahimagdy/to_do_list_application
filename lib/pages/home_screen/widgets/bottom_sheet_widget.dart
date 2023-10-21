@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_application/core/network_layer/firestore_utils.dart';
 import 'package:to_do_application/core/widgets/custom_text_form_field.dart';
 import 'package:to_do_application/model/task_model.dart';
+
+import '../../../core/provider/app_provider.dart';
 
 class BottomSheetWidget extends StatefulWidget {
   const BottomSheetWidget({super.key});
@@ -22,6 +25,8 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var local = AppLocalizations.of(context)!;
+    var appProvider = Provider.of<AppProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Form(
@@ -34,7 +39,9 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
               local.add_new_task,
               textAlign: TextAlign.center,
               style: theme.textTheme.titleLarge!.copyWith(
-                color: const Color(0xff383838),
+                color: appProvider.isLight()
+                    ? const Color(0xff383838)
+                    : Colors.white,
               ),
             ),
             CustomTextFormField(
@@ -66,7 +73,9 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                 Text(
                   local.select_date,
                   style: theme.textTheme.bodyLarge!.copyWith(
-                    color: const Color(0xff383838),
+                    color: appProvider.isLight()
+                        ? const Color(0xff383838)
+                        : Colors.white,
                   ),
                 ),
                 GestureDetector(

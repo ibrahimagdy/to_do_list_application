@@ -1,11 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:to_do_application/core/utils/extract_date.dart';
 import 'package:to_do_application/model/task_model.dart';
 
 class FirestoreUtils {
   static CollectionReference<TaskModel> getCollection() {
+    final user = FirebaseAuth.instance.currentUser;
     return FirebaseFirestore.instance
         .collection("Task Collection")
+        .doc(user!.uid)
+        .collection("users")
         .withConverter<TaskModel>(
           fromFirestore: (snapshot, _) =>
               TaskModel.fromFirestore(snapshot.data()!),

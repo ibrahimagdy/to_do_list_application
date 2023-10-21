@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../core/provider/app_provider.dart';
 
 class SelectedOptionWidget extends StatelessWidget {
   final String selectedTitleOption;
@@ -8,13 +10,14 @@ class SelectedOptionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var appProvider = Provider.of<AppProvider>(context);
     return Container(
       height: 60,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         border: Border.all(
           color: theme.primaryColor,
-          width: 2,
+          width: 3,
         ),
         borderRadius: BorderRadius.circular(15),
         color: Colors.white54,
@@ -24,11 +27,13 @@ class SelectedOptionWidget extends StatelessWidget {
         children: [
           Text(
             selectedTitleOption,
-            style: theme.textTheme.titleMedium,
+            style: appProvider.isLight()
+                ? theme.textTheme.titleMedium
+                : theme.textTheme.headlineMedium,
           ),
           Icon(
             Icons.check,
-            color: theme.primaryColor,
+            color: theme.colorScheme.tertiary,
             size: 28,
           )
         ],

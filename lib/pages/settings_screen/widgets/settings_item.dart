@@ -17,6 +17,7 @@ class SettingsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -26,7 +27,7 @@ class SettingsItem extends StatelessWidget {
             settingOptionTitle,
             textAlign: TextAlign.start,
             style: theme.textTheme.bodyLarge!.copyWith(
-              color: const Color(0xff303030),
+              color: theme.colorScheme.scrim,
             ),
           ),
         ),
@@ -38,9 +39,12 @@ class SettingsItem extends StatelessWidget {
             width: mediaQuery.width,
             height: 50,
             decoration: BoxDecoration(
-              color: theme.colorScheme.onPrimary,
+              color: theme.colorScheme.primaryContainer,
               borderRadius: BorderRadius.circular(2),
-              border: Border.all(color: theme.primaryColor),
+              border: Border.all(
+                color: theme.primaryColor,
+                width: 3,
+              ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

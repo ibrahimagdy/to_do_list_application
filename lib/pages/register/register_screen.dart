@@ -42,7 +42,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             backgroundColor: Colors.transparent,
             title: Text(
               local.create_account,
-            style: theme.textTheme.titleLarge,
+            style: theme.textTheme.displayLarge,
           ),
           ),
           body: Padding(
@@ -159,7 +159,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           children: [
                             Text(
                               local.create_account,
-                            style: theme.textTheme.titleLarge,
+                            style: theme.textTheme.displayLarge,
                           ),
                             const Icon(
                               Icons.arrow_forward,

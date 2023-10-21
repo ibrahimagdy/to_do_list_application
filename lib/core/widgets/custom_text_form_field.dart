@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../provider/app_provider.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -23,21 +25,34 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var appProvider = Provider.of<AppProvider>(context);
     return TextFormField(
       validator: validator,
       controller: controller,
       maxLines: maxLines,
       obscureText: obscureText,
+      style: TextStyle(color: theme.primaryColor, fontSize: 18),
       decoration: InputDecoration(
         suffixIcon: suffixIcon,
         suffixIconColor: theme.primaryColor,
         labelText: labelText,
-        labelStyle: theme.textTheme.bodyLarge!.copyWith(
-          color: Colors.black,
-        ),
+        labelStyle: theme.textTheme.headlineMedium,
         hintText: title,
         hintStyle: theme.textTheme.bodyLarge!.copyWith(
-          color: const Color(0xffA9A9A9).withOpacity(0.61),
+          color: appProvider.isLight()
+              ? const Color(0xffA9A9A9).withOpacity(0.61)
+              : Colors.white.withOpacity(0.7),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: theme.colorScheme.scrim,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(
+            color: theme.colorScheme.scrim,
+          ),
         ),
       ),
     );
