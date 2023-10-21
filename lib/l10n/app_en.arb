@@ -30,5 +30,8 @@
   "you_must_enter_your_password": "You must enter your password",
   "you_must_enter_your_full_name": "You must enter your Full Name",
   "invalid_password": "Invalid Password",
-  "password_does_not_match_as_above": "Password does not match as above"
+  "password_does_not_match_as_above": "Password does not match as above",
+  "logout": "Logout",
+  "log_out_of_your_account": "Log out of your account?",
+  "cancel": "Cancel"
 }

@@ -21,6 +21,7 @@ class _HomeLayoutState extends State<HomeLayout> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return Scaffold(
       body: screens[selectedIndex],
       floatingActionButton: FloatingActionButton(
@@ -37,7 +38,8 @@ class _HomeLayoutState extends State<HomeLayout> {
       extendBody: true,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
-        notchMargin: 10,
+        notchMargin: 15,
+        color: theme.colorScheme.outline,
         child: BottomNavigationBar(
           currentIndex: selectedIndex,
           onTap: (value) {
