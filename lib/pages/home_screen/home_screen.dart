@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6),
               margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
               decoration: BoxDecoration(
-                color: Colors.white38,
+                color: theme.colorScheme.outline.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: CalendarTimeline(
@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 leftMargin: 20,
                 monthColor: Colors.white,
-                dayColor: Colors.black,
+                dayColor: theme.colorScheme.scrim,
                 activeDayColor: theme.primaryColor,
                 activeBackgroundDayColor: Colors.white,
                 dotsColor: theme.primaryColor,

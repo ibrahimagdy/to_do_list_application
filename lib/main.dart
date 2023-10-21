@@ -1,15 +1,16 @@
-import 'package:bot_toast/bot_toast.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:to_do_application/core/provider/app_provider.dart';
 import 'package:to_do_application/core/services/loading_service.dart';
 import 'package:to_do_application/core/theme/application_theme.dart';
 import 'package:to_do_application/layout/home_layout.dart';
 import 'package:to_do_application/pages/login/login_screen.dart';
 import 'package:to_do_application/pages/register/register_screen.dart';
 import 'package:to_do_application/pages/splash_screen/splash_screen.dart';
-
+import 'package:bot_toast/bot_toast.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -17,7 +18,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApplication());
+  runApp(ChangeNotifierProvider(
+      create: (context) => AppProvider(), child: const MyApplication()));
   configLoading();
 }
 
@@ -26,6 +28,7 @@ class MyApplication extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var appProvider = Provider.of<AppProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: SplashScreen.routeName,
@@ -40,10 +43,10 @@ class MyApplication extends StatelessWidget {
       ),
       theme: ApplicationTheme.lightTheme,
       darkTheme: ApplicationTheme.darkTheme,
-      themeMode: ThemeMode.light,
+      themeMode: appProvider.currentTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: const Locale("en"),
+      locale: Locale(appProvider.currentLocal),
     );
   }
 }

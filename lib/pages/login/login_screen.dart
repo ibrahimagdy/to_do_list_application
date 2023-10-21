@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
             backgroundColor: Colors.transparent,
             title: Text(
               local.login,
-            style: theme.textTheme.titleLarge,
+            style: theme.textTheme.displayLarge,
           ),
           ),
           body: Padding(
@@ -56,9 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text(
                       local.welcome_back,
                     textAlign: TextAlign.start,
-                    style: theme.textTheme.titleLarge!.copyWith(
-                      color: Colors.black,
-                    ),
+                    style: theme.textTheme.headlineLarge,
                   ),
                     const SizedBox(height: 40),
                     CustomTextFormField(
@@ -111,9 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           local.forget_password,
                         textAlign: TextAlign.start,
-                        style: theme.textTheme.bodyMedium!.copyWith(
-                          color: Colors.black,
-                        ),
+                        style: theme.textTheme.bodyMedium,
                       ),
                       ),
                     ),
@@ -134,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             Text(
                               local.login,
-                            style: theme.textTheme.titleLarge,
+                            style: theme.textTheme.displayLarge,
                           ),
                             const Icon(
                               Icons.arrow_forward,

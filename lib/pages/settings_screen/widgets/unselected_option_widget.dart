@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../core/provider/app_provider.dart';
 
 class UnselectedOptionWidget extends StatelessWidget {
   final String unselectedTitleOption;
@@ -9,13 +11,14 @@ class UnselectedOptionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var appProvider = Provider.of<AppProvider>(context);
     return Container(
       height: 60,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         border: Border.all(
           color: theme.primaryColor,
-          width: 2,
+          width: 3,
         ),
         borderRadius: BorderRadius.circular(15),
         color: Colors.white54,
@@ -25,7 +28,9 @@ class UnselectedOptionWidget extends StatelessWidget {
         children: [
           Text(
             unselectedTitleOption,
-            style: theme.textTheme.titleMedium,
+            style: appProvider.isLight()
+                ? theme.textTheme.titleMedium
+                : theme.textTheme.headlineMedium,
           ),
         ],
       ),

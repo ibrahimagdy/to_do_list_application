@@ -3,31 +3,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_application/core/network_layer/firestore_utils.dart';
 import 'package:to_do_application/model/task_model.dart';
+import '../../../core/provider/app_provider.dart';
 
 class TaskItemWidget extends StatelessWidget {
   const TaskItemWidget({super.key, required this.taskModel});
 
   final TaskModel taskModel;
-
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var local = AppLocalizations.of(context)!;
+    var appProvider = Provider.of<AppProvider>(context);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
-          colors: [
-            Color(0xFFEC4B4B),
-            Color(0xFFEC4B4B),
-            Color(0xFFE8DD1B),
-            Color(0xFFE8DD1B),
-          ],
+          colors: appProvider.isEnglish()
+              ? [
+                  const Color(0xFFEC4B4B),
+                  const Color(0xFFEC4B4B),
+                  const Color(0xFFE8DD1B),
+                  const Color(0xFFE8DD1B),
+                ]
+              : [
+                  const Color(0xFFE8DD1B),
+                  const Color(0xFFE8DD1B),
+                  const Color(0xFFEC4B4B),
+                  const Color(0xFFEC4B4B),
+                ],
         ),
       ),
       child: Slidable(
@@ -66,7 +75,7 @@ class TaskItemWidget extends StatelessWidget {
           height: 125,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: Colors.white,
+            color: theme.colorScheme.outline,
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -108,9 +117,10 @@ class TaskItemWidget extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      const Icon(
+                      Icon(
                         CupertinoIcons.clock,
                         size: 20,
+                        color: theme.colorScheme.scrim,
                       ),
                       const SizedBox(width: 5),
                       Text(
