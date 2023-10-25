@@ -38,6 +38,7 @@ class SettingsScreen extends StatelessWidget {
             showLanguageBottomSheet(context);
           },
         ),
+        const SizedBox(height: 30),
         SettingsItem(
           settingOptionTitle: local.theme_mode,
           settingOptionSelected:

@@ -7,7 +7,7 @@
   "email": "Email",
   "password": "Password",
   "forget_password": "Forget Password?",
-  "or_create_new_account": "Or Create New Account !",
+  "do_not_have_account": "Don't have an account? Sign Up",
   "full_name": "Full Name",
   "confirm_password": "Confirm Password",
   "create_account": "Create Account",
