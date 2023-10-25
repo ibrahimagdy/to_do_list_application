@@ -147,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.pushNamed(context, RegisterScreen.routeName);
                       },
                       child: Text(
-                        local.or_create_new_account,
+                        local.do_not_have_account,
                       textAlign: TextAlign.center,
                       style: theme.textTheme.bodyMedium!.copyWith(
                         color: theme.primaryColor,

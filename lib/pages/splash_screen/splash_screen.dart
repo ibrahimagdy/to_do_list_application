@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_application/core/provider/app_provider.dart';
@@ -27,10 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     var appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
       body: Image.asset(
-        appProvider.isLight()
-            ? "assets/images/splash_screen.png"
-            : "assets/images/splash_screen_dark.png",
-      ),
+        appProvider.splashScreenImage()),
     );
   }
 }
