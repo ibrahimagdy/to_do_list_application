@@ -22,7 +22,9 @@ class SettingsItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 20, top: 12),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 25,
+          ),
           child: Text(
             settingOptionTitle,
             textAlign: TextAlign.start,
