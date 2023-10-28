@@ -42,4 +42,14 @@ class FirestoreUtils {
     var collectionRef = getCollection();
     return collectionRef.doc(model.id).delete();
   }
+
+  static Future<void> isDone(TaskModel model) async {
+    var collectionRef = getCollection();
+    return collectionRef.doc(model.id).update({"isDone": !model.isDone});
+  }
+
+  static Future<void> editTask(TaskModel model) async {
+    var collectionRef = getCollection();
+    return collectionRef.doc(model.id).update(model.toFirestore());
+  }
 }
