@@ -15,9 +15,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   DateTime selectedDate = DateTime.now();
-
   @override
   Widget build(BuildContext context) {
+    // var provider = Provider.of<AppProvider>(context);
     var theme = Theme.of(context);
     var local = AppLocalizations.of(context)!;
     return Column(
@@ -44,12 +44,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: CalendarTimeline(
-                initialDate: DateTime.now(),
+                initialDate: selectedDate,
                 firstDate: DateTime.now(),
                 lastDate: DateTime.now().add(const Duration(days: 365)),
                 onDateSelected: (date) {
-                  selectedDate = date;
-                  setState(() {});
+                  if (selectedDate != date) {
+                    setState(() {
+                      selectedDate = date;
+                    });
+                  }
                 },
                 leftMargin: 20,
                 monthColor: Colors.white,
@@ -57,7 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 activeDayColor: theme.primaryColor,
                 activeBackgroundDayColor: Colors.white,
                 dotsColor: theme.primaryColor,
-                locale: 'en_ISO',
               ),
             ),
           ],

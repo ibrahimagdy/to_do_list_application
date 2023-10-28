@@ -33,5 +33,7 @@
   "password_does_not_match_as_above": "كلمة المرور غير مطابقة كما في الأعلى",
   "logout": "تسجيل خروج",
   "log_out_of_your_account": "تسجيل خروج من حسابك؟",
-  "cancel": "إلغاء"
+  "cancel": "إلغاء",
+  "done": "تم!",
+  "edit_task": "تعديل المهمة"
 }

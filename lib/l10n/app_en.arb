@@ -33,5 +33,7 @@
   "password_does_not_match_as_above": "Password does not match as above",
   "logout": "Logout",
   "log_out_of_your_account": "Log out of your account?",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "done": "Done!",
+  "edit_task": "Edit Task"
 }

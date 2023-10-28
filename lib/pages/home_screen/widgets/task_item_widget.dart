@@ -6,12 +6,20 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_application/core/network_layer/firestore_utils.dart';
 import 'package:to_do_application/model/task_model.dart';
+import 'package:to_do_application/pages/edit_task/edit_task.dart';
+
 import '../../../core/provider/app_provider.dart';
 
-class TaskItemWidget extends StatelessWidget {
+class TaskItemWidget extends StatefulWidget {
   const TaskItemWidget({super.key, required this.taskModel});
 
   final TaskModel taskModel;
+
+  @override
+  State<TaskItemWidget> createState() => _TaskItemWidgetState();
+}
+
+class _TaskItemWidgetState extends State<TaskItemWidget> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -26,17 +34,17 @@ class TaskItemWidget extends StatelessWidget {
           end: Alignment.centerRight,
           colors: appProvider.isEnglish()
               ? [
-                  const Color(0xFFEC4B4B),
-                  const Color(0xFFEC4B4B),
-                  const Color(0xFFE8DD1B),
-                  const Color(0xFFE8DD1B),
-                ]
+            const Color(0xFFEC4B4B),
+            const Color(0xFFEC4B4B),
+            const Color(0xFFE8DD1B),
+            const Color(0xFFE8DD1B),
+          ]
               : [
-                  const Color(0xFFE8DD1B),
-                  const Color(0xFFE8DD1B),
-                  const Color(0xFFEC4B4B),
-                  const Color(0xFFEC4B4B),
-                ],
+            const Color(0xFFE8DD1B),
+            const Color(0xFFE8DD1B),
+            const Color(0xFFEC4B4B),
+            const Color(0xFFEC4B4B),
+          ],
         ),
       ),
       child: Slidable(
@@ -46,7 +54,7 @@ class TaskItemWidget extends StatelessWidget {
           children: [
             SlidableAction(
               onPressed: (context) async {
-                await FirestoreUtils.deleteDataFromFirestore(taskModel);
+                await FirestoreUtils.deleteDataFromFirestore(widget.taskModel);
               },
               borderRadius: BorderRadius.circular(15),
               backgroundColor: const Color(0xFFEC4B4B),
@@ -61,7 +69,10 @@ class TaskItemWidget extends StatelessWidget {
           motion: const DrawerMotion(),
           children: [
             SlidableAction(
-              onPressed: (context) {},
+              onPressed: (context) {
+                Navigator.pushNamed(context, EditTask.routeName,
+                    arguments: widget.taskModel);
+              },
               borderRadius: BorderRadius.circular(15),
               backgroundColor: const Color(0xFFE8DD1B),
               foregroundColor: Colors.white,
@@ -86,7 +97,9 @@ class TaskItemWidget extends StatelessWidget {
                 height: 80,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: theme.primaryColor,
+                  color: widget.taskModel.isDone
+                      ? const Color(0xff61E757)
+                      : theme.primaryColor,
                 ),
               ),
               Column(
@@ -99,22 +112,28 @@ class TaskItemWidget extends StatelessWidget {
                       maxHeight: 500,
                     ),
                     child: Text(
-                      taskModel.title,
-                      style: theme.textTheme.bodyLarge,
+                      widget.taskModel.title,
+                      style: widget.taskModel.isDone
+                          ? theme.textTheme.displayMedium
+                          : theme.textTheme.bodyMedium,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
+                  const SizedBox(height: 10),
                   Container(
                     constraints: const BoxConstraints(
                       maxWidth: 200,
                       maxHeight: 500,
                     ),
                     child: Text(
-                      taskModel.description,
-                      style: theme.textTheme.bodyMedium,
+                      widget.taskModel.description,
+                      style: widget.taskModel.isDone
+                          ? theme.textTheme.displayMedium
+                          : theme.textTheme.bodyMedium,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
+                  const SizedBox(height: 10),
                   Row(
                     children: [
                       Icon(
@@ -124,21 +143,34 @@ class TaskItemWidget extends StatelessWidget {
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        DateFormat.yMMMEd().format(taskModel.dateTime),
+                        DateFormat.yMMMEd().format(widget.taskModel.dateTime),
                         style: theme.textTheme.bodySmall,
                       ),
                     ],
                   ),
                 ],
               ),
-              Container(
-                width: 70,
-                height: 37,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: theme.primaryColor,
-                ),
-                child: Image.asset("assets/images/check_icon.png"),
+              GestureDetector(
+                onTap: () {
+                  FirestoreUtils.isDone(widget.taskModel);
+                  setState(() {});
+                },
+                child: widget.taskModel.isDone
+                    ? Text(
+                        local.done,
+                        style: theme.textTheme.displayMedium!.copyWith(
+                          fontSize: 22,
+                        ),
+                      )
+                    : Container(
+                        width: 70,
+                        height: 37,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: theme.primaryColor,
+                        ),
+                        child: Image.asset("assets/images/check_icon.png"),
+                      ),
               ),
             ],
           ),

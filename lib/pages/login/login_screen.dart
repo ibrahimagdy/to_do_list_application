@@ -171,7 +171,6 @@ class _LoginScreenState extends State<LoginScreen> {
           password: passwordController.text,
         );
         EasyLoading.dismiss();
-
         SnackBarService.showSuccessMessage("You Successfully signed in");
         Navigator.pushReplacementNamed(context, HomeLayout.routeName);
       } on FirebaseAuthException catch (e) {
@@ -182,6 +181,9 @@ class _LoginScreenState extends State<LoginScreen> {
           EasyLoading.dismiss();
           SnackBarService.showErrorMessage(
               'Wrong password provided for that user');
+        } else if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
+          EasyLoading.dismiss();
+          SnackBarService.showErrorMessage('Wrong Password');
         }
       }
     }
