@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +9,7 @@ import 'package:to_do_application/pages/settings_screen/widgets/settings_item.da
 import 'package:to_do_application/pages/settings_screen/widgets/theme_bottom_sheet.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class SettingsScreen extends StatelessWidget {
         SettingsItem(
           settingOptionTitle: local.language,
           settingOptionSelected:
-              appProvider.isEnglish() ? local.english : local.arabic,
+          appProvider.isEnglish() ? local.english : local.arabic,
           onTabOption: () {
             showLanguageBottomSheet(context);
           },
@@ -42,7 +43,7 @@ class SettingsScreen extends StatelessWidget {
         SettingsItem(
           settingOptionTitle: local.theme_mode,
           settingOptionSelected:
-              appProvider.isLight() ? local.light_mode : local.dark_mode,
+          appProvider.isLight() ? local.light_mode : local.dark_mode,
           onTabOption: () {
             showThemeBottomSheet(context);
           },
@@ -54,7 +55,7 @@ class SettingsScreen extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 40),
             margin: const EdgeInsets.all(25),
-            width: mediaQuery.width * 0.5,
+            width: mediaQuery.width * 0.55,
             height: 50,
             decoration: BoxDecoration(
               color: theme.colorScheme.primaryContainer,
@@ -103,7 +104,7 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  void showLogoutConfirmationDialog(context) {
+  void showLogoutConfirmationDialog(BuildContext context) {
     var local = AppLocalizations.of(context)!;
     var theme = Theme.of(context);
     showDialog(
@@ -121,9 +122,10 @@ class SettingsScreen extends StatelessWidget {
                 Text(
                   local.log_out_of_your_account,
                   style: const TextStyle(
-                      fontSize: 21,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
+                    fontSize: 21,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
                 const SizedBox(height: 10),
                 const Divider(
@@ -138,27 +140,30 @@ class SettingsScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(dialogContext).pop();
                         },
-                        child: Text(local.cancel,
-                            style: theme.textTheme.bodyLarge!.copyWith(
-                              color: theme.primaryColor,
-                            )),
+                        child: Text(
+                          local.cancel,
+                          style: theme.textTheme.bodyLarge!.copyWith(
+                            color: theme.primaryColor,
+                          ),
+                        ),
                       ),
-                    ),
-                    const VerticalDivider(
-                      color: Colors.grey,
-                      thickness: 1.0,
                     ),
                     Expanded(
                       child: TextButton(
                         onPressed: () {
                           Navigator.of(dialogContext).pop(); // Close the dialog
-                          Navigator.pushReplacementNamed(
-                              context, LoginScreen.routeName);
+                          var auth = FirebaseAuth.instance;
+                          auth.signOut().then((value) {
+                            Navigator.pushReplacementNamed(
+                                context, LoginScreen.routeName);
+                          });
                         },
-                        child: Text(local.logout,
-                            style: theme.textTheme.bodyLarge!.copyWith(
-                              color: Colors.red,
-                            )),
+                        child: Text(
+                          local.logout,
+                          style: theme.textTheme.bodyLarge!.copyWith(
+                            color: Colors.red,
+                          ),
+                        ),
                       ),
                     ),
                   ],

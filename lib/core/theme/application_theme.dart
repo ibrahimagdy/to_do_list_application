@@ -55,41 +55,47 @@ class ApplicationTheme {
           fontSize: 22,
           color: Colors.white,
         ),
-        titleMedium: GoogleFonts.poppins(
-          fontWeight: FontWeight.bold,
+      titleMedium: GoogleFonts.poppins(
+        fontWeight: FontWeight.bold,
+        fontSize: 18,
+        color: primaryColor,
+      ),
+      headlineLarge: GoogleFonts.poppins(
+        fontWeight: FontWeight.bold,
+        fontSize: 22,
+        color: Colors.black,
+      ),
+      headlineMedium: GoogleFonts.poppins(
+        fontWeight: FontWeight.bold,
+        fontSize: 18,
+        color: Colors.black,
+      ),
+      displayLarge: GoogleFonts.poppins(
+        fontWeight: FontWeight.bold,
+        fontSize: 22,
+        color: Colors.white,
+      ),
+      displayMedium: GoogleFonts.roboto(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: const Color(0xff61E757),
+      ),
+      bodyLarge: GoogleFonts.poppins(
           fontSize: 18,
+          fontWeight: FontWeight.bold,
           color: primaryColor,
-        ),
-        headlineLarge: GoogleFonts.poppins(
-          fontWeight: FontWeight.bold,
-          fontSize: 22,
-          color: Colors.black,
-        ),
-        displayLarge: GoogleFonts.poppins(
-          fontWeight: FontWeight.bold,
-          fontSize: 22,
-          color: Colors.white,
-        ),
-        headlineMedium: GoogleFonts.poppins(
-          fontWeight: FontWeight.bold,
-          fontSize: 18,
-          color: Colors.black,
-        ),
-        bodyLarge: GoogleFonts.poppins(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: primaryColor,
-        ),
-        bodyMedium: GoogleFonts.roboto(
-          fontSize: 17,
-          fontWeight: FontWeight.bold,
-          color: Colors.black,
-        ),
-        bodySmall: GoogleFonts.roboto(
-          fontSize: 12,
-          fontWeight: FontWeight.normal,
-          color: const Color(0xff363636),
-        )),
+      ),
+      bodyMedium: GoogleFonts.roboto(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),
+      bodySmall: GoogleFonts.roboto(
+        fontSize: 12,
+        fontWeight: FontWeight.normal,
+        color: const Color(0xff363636),
+      ),
+    ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: primaryColor,
     ),
@@ -158,6 +164,11 @@ class ApplicationTheme {
           fontSize: 22,
           color: Colors.white,
         ),
+        displayMedium: GoogleFonts.roboto(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: const Color(0xff61E757),
+        ),
         headlineLarge: GoogleFonts.poppins(
           fontWeight: FontWeight.bold,
           fontSize: 22,
@@ -174,7 +185,7 @@ class ApplicationTheme {
           color: primaryColor,
         ),
         bodyMedium: GoogleFonts.roboto(
-          fontSize: 15,
+          fontSize: 18,
           fontWeight: FontWeight.bold,
           color: Colors.white,
         ),
