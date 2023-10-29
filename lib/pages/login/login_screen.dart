@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         return local.you_must_enter_your_email;
                       }
                       var regex = RegExp(
-                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+                          r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
                       if (!regex.hasMatch(value)) {
                         return local.invalid_email;
                       }
@@ -164,14 +164,25 @@ class _LoginScreenState extends State<LoginScreen> {
   }
   login() async {
     if (formKey.currentState!.validate()) {
+      String email = emailController.text.trim();
+      String password = passwordController.text.trim();
+      if (email.isEmpty) {
+        SnackBarService.showErrorMessage('Please enter a valid email address');
+        return;
+      }
+      if (password.isEmpty) {
+        SnackBarService.showErrorMessage('Please enter a valid password');
+        return;
+      }
+
       EasyLoading.show();
       try {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text,
+          email: email,
+          password: password,
         );
         EasyLoading.dismiss();
-        SnackBarService.showSuccessMessage("You Successfully signed in");
+        SnackBarService.showSuccessMessage("You have successfully signed in");
         Navigator.pushReplacementNamed(context, HomeLayout.routeName);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
@@ -183,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
               'Wrong password provided for that user');
         } else if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
           EasyLoading.dismiss();
-          SnackBarService.showErrorMessage('Wrong Password');
+          SnackBarService.showErrorMessage('Wrong password');
         }
       }
     }

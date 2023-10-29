@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:to_do_application/Fcm/fcm.dart';
 import 'package:to_do_application/core/provider/app_provider.dart';
 import 'package:to_do_application/core/services/loading_service.dart';
 import 'package:to_do_application/core/theme/application_theme.dart';
@@ -23,6 +24,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FCM.fcmInit();
   runApp(ChangeNotifierProvider(
       create: (context) => AppProvider(prefs), child: const MyApplication()));
   configLoading();
