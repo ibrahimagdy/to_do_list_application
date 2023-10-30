@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_application/pages/home_screen/widgets/bottom_sheet_widget.dart';
 import 'package:to_do_application/pages/home_screen/home_screen.dart';
+import 'package:to_do_application/pages/home_screen/widgets/bottom_sheet_widget.dart';
 import 'package:to_do_application/pages/settings_screen/settings_screen.dart';
 
 class HomeLayout extends StatefulWidget {
@@ -66,6 +66,7 @@ class _HomeLayoutState extends State<HomeLayout> {
 
   void showAddTaskBottomSheet() {
     showModalBottomSheet(
+      isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(25),
@@ -73,7 +74,11 @@ class _HomeLayoutState extends State<HomeLayout> {
         ),
       ),
       context: context,
-      builder: (context) => const BottomSheetWidget(),
+      builder: (context) => Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: const BottomSheetWidget(),
+      ),
     );
   }
 }
