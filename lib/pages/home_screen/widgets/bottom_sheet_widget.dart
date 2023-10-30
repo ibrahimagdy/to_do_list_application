@@ -32,9 +32,11 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
       child: Form(
         key: formKey,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const SizedBox(height: 20),
             Text(
               local.add_new_task,
               textAlign: TextAlign.center,
@@ -44,6 +46,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                     : Colors.white,
               ),
             ),
+            const SizedBox(height: 20),
             CustomTextFormField(
               title: local.enter_your_task,
               controller: titleController,
@@ -55,6 +58,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                 }
               },
             ),
+            const SizedBox(height: 20),
             CustomTextFormField(
               title: local.enter_your_task_description,
               controller: descriptionController,
@@ -67,6 +71,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                 }
               },
             ),
+            const SizedBox(height: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -78,6 +83,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                         : Colors.white,
                   ),
                 ),
+                const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
                     showCalender(context);
@@ -100,8 +106,8 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                         dateTime: selectedDate,
                         isDone: false,
                       );
-                      await FirestoreUtils.addDataToFireStore(model);
                       Navigator.pop(context);
+                      await FirestoreUtils.addDataToFireStore(model);
                     }
                   },
                   child: Text(
@@ -111,6 +117,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 20),
               ],
             ),
           ],
