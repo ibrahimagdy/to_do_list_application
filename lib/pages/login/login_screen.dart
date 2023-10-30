@@ -194,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
               'Wrong password provided for that user');
         } else if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
           EasyLoading.dismiss();
-          SnackBarService.showErrorMessage('Wrong password');
+          SnackBarService.showErrorMessage('Wrong email or password');
         }
       }
     }
