@@ -17,20 +17,19 @@ class _HomeScreenState extends State<HomeScreen> {
   DateTime selectedDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
-    // var provider = Provider.of<AppProvider>(context);
     var theme = Theme.of(context);
     var local = AppLocalizations.of(context)!;
     return Column(
       children: [
         Stack(
-          alignment: const Alignment(0, 3.5),
+          alignment: const Alignment(0, 12),
           children: [
             Container(
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.symmetric(horizontal: 50),
               color: theme.primaryColor,
               width: double.infinity,
-              height: 160,
+              height: 140,
               child: Text(
                 local.to_do_list,
                 style: theme.textTheme.titleLarge,
@@ -64,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        const SizedBox(height: 55),
+        const SizedBox(height: 78),
         Expanded(
           child: StreamBuilder<QuerySnapshot<TaskModel>>(
             stream: FirestoreUtils.getRealTimeDataFromFireStore(selectedDate),
