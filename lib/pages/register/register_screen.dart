@@ -182,17 +182,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void register() async {
     if (formKey.currentState!.validate()) {
+      String email = emailController.text.trim();
+      String password = passwordController.text.trim();
+      if (email.isEmpty) {
+        SnackBarService.showErrorMessage('Please enter a valid email address');
+        return;
+      }
+      if (password.isEmpty) {
+        SnackBarService.showErrorMessage('Please enter a valid password');
+        return;
+      }
       EasyLoading.show();
       try {
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text,
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
         );
 
         EasyLoading.dismiss();
         SnackBarService.showSuccessMessage("Your account has been registered");
         Navigator.pop(context);
-
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           EasyLoading.dismiss();
